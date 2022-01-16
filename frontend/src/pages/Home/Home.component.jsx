@@ -30,7 +30,7 @@ const Home = () => {
           breaks up!
         </p>
         <div>
-            <Button onClick={startRegister} text="Get your username"/>
+            <Button onClick={startRegister} text="Let's Go"/>
         </div>
         <div className={styles.signinwrapper}>
           <span className={styles.hasInvite}>Have an invite text? </span>
