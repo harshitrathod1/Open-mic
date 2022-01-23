@@ -1,8 +1,8 @@
 import React from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { Card } from "../../components/shared/Card/Card.component";
-import { Button } from "../../components/shared/Button/Button.component";
+import Card from "../../components/shared/Card/Card.component";
+import Button from "../../components/shared/Button/Button.component";
 
 import styles from "./Home.module.css";
 
@@ -18,7 +18,7 @@ const Home = () => {
   }
 
   function startRegister(){
-      navigate("/register")
+      navigate("/authenticate")
   }
 
   return (
@@ -34,7 +34,6 @@ const Home = () => {
         </div>
         <div className={styles.signinwrapper}>
           <span className={styles.hasInvite}>Have an invite text? </span>
-          <Link style={signInLinkStyle} to="/login">Sign in</Link>
         </div>
       </Card>
     </div>

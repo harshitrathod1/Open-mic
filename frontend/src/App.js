@@ -9,8 +9,8 @@ import Rooms from "./pages/Rooms/Rooms.component";
 
 const isAuth = false;
 const user = {
-  activated : false
-}
+  activated: false,
+};
 
 const App = () => {
   return (
@@ -43,12 +43,12 @@ const App = () => {
         />
 
         <Route
-            path="/rooms"
-            element={
-              <ProtectedRoute>
-                <Rooms/>
-              </ProtectedRoute>
-            }
+          path="/rooms"
+          element={
+            <ProtectedRoute>
+              <Rooms />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </BrowserRouter>
@@ -71,11 +71,11 @@ const SemiProtectedRoute = ({ children }) => {
 
 const ProtectedRoute = ({ children }) => {
   return !isAuth ? (
-    <Navigate to="/"/>
+    <Navigate to="/" />
   ) : isAuth && !user.activated ? (
-    <Navigate to="/activate"/>
+    <Navigate to="/activate" />
   ) : (
     children
-  )
-}
+  );
+};
 export default App;
