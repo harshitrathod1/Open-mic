@@ -1,14 +1,30 @@
 import React, { useState } from "react";
+import { verifyOtp } from "../../../http/index";
+import { useSelector, useDispatch } from "react-redux";
 
 import Card from "components/shared/Card/Card.component";
-
 import TextInput from "components/shared/TextInput/TextInput.component";
 import Button from "components/shared/Button/Button.component";
 
 import styles from './StepOtp.module.css';
+import { setAuth } from "redux/userAuth/userAuth.actions";
 
-const StepOtp = ({ onNext }) => {
+const StepOtp = () => {
   const [otp, setOtp] = useState("");
+  let { phone, hash } = useSelector((state) => state.userAuth.otp );
+  const dispatch = useDispatch();
+
+  async function submit(){
+      try{
+        const { data } = await verifyOtp({ otp, phone, hash });
+        console.log(data);
+        dispatch(setAuth(data));
+      }catch(error){
+        alert("OTP invalid");
+        console.log(error);
+      }
+  }
+
   return (
     <>
       <div className={styles.cardWrapper}>
@@ -16,7 +32,7 @@ const StepOtp = ({ onNext }) => {
           <TextInput value={otp} onChange={(e) => setOtp(e.target.value)} />
 
           <div className={styles.actionButtonWrap}>
-            <Button onClick={onNext} text="Next" />
+            <Button onClick={submit} text="Next" />
           </div>
           
           <p className={styles.bottomParagraph}>

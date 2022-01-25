@@ -2,6 +2,7 @@ const otpService = require("../services/otp.service");
 const hashService = require("../services/hash.service");
 const userService = require("../services/user.service");
 const tokenService = require("../services/token.service");
+const UserDto = require("../dtos/user.dto");
 
 class AuthController {
   async sendOtp(req, res) {
@@ -9,6 +10,7 @@ class AuthController {
     const { phone } = req.body;
     if (!phone) {
       res.status(400).json({ message: "Phone field is required" });
+      return;
     }
 
     //Generate a four digit random OTP
@@ -23,14 +25,16 @@ class AuthController {
 
     //Send OTP
     try {
-      await otpService.sendBySms(phone, otp);
+      // await otpService.sendBySms(phone, otp);
       return res.json({
         hash: `${hash}.${expires}`,
         phone,
+        otp
       });
     } catch (err) {
       //console.log(err);
       res.status(500).json({ message: "message sending failed" });
+      return;
     }
   }
 
@@ -80,12 +84,21 @@ class AuthController {
       activated: false
     });
     
+    await tokenService.storeRefreshTokenInDb(refreshToken, user._id);
+
     res.cookie('refreshtoken',refreshToken,{ 
       maxAge: 1000 * 60 * 60 * 24 * 30,
       httpOnly: true
     });
 
-    res.json({ accessToken })
+    res.cookie('accessToken',accessToken,{
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      httpOnly: true
+    })
+
+    const userDto = new UserDto(user);
+
+    res.json({ user: userDto, auth : true });
   }
 }
 
