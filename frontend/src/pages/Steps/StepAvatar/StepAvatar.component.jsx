@@ -1,20 +1,23 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useSelector,useDispatch } from "react-redux";
 
 import { setAvatar } from "redux/userActivate/userActivate.actions";
 import { activate } from "../../../http/index";
+import { setAuth } from "redux/userAuth/userAuth.actions";
 
 import Card from "components/shared/Card/Card.component";
 import Button from "components/shared/Button/Button.component";
+import Loader from "components/shared/Loader/Loader.component";
 
 import styles from "./StepAvatar.module.css";
-import { setAuth } from "redux/userAuth/userAuth.actions";
 
 const StepAvatar = ({ onNext }) => {
-  const { name,avatar } = useSelector((state) => state.userActivate); 
   const dispatch = useDispatch();
+  const { name,avatar } = useSelector((state) => state.userActivate); 
   const [ imageUrl, setImageUrl ] = useState('/images/monkey-avatar.png');
+  const [ loading, setLoading ] = useState(false);
+  const [ unMounted, setUnMounted] = useState(false);
 
   function captureImage(event){
       const file = event.target.files[0];
@@ -27,15 +30,34 @@ const StepAvatar = ({ onNext }) => {
   }
 
   async function submit(){
+    if (!name || !avatar){
+      alert("No images selected");
+      return;
+    } 
+      
+    setLoading(true);
     try{
       const { data } = await activate({ name, avatar});
       if(data.auth){
-        dispatch(setAuth(data))
+        if(!unMounted){
+          dispatch(setAuth(data)); 
+        }
       }
     }catch(error){
       console.log("Submit error : ",error);
+    }finally{
+      setLoading(false);
     }
   }
+
+  useEffect(() => {
+    return () => {
+      setUnMounted(true);
+    }
+  },[]);
+
+  if (loading) return <Loader message="Activation in progress..."/>
+
   return (
     <>
       <Card title={`Okay ${name}.. !`} icon="monkey-emoji">

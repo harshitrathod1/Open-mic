@@ -6,13 +6,10 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5500/api/verify-otp HTTP/1.1
+POST http://localhost:5500/api/refresh HTTP/1.1
 Content-Type: application/json
 
-{
-    "phone": "+917415267759",
-    "otp" : 8405,
-    "hash" : "984e87c50635d350536594c2a1e38dae6101fb61d01f34d1bbcb02320225a551.1642921108724"
+{   
+    "Cookies", 
+    "refreshToken" : "412412421"
 }
-
-# {"hash":"984e87c50635d350536594c2a1e38dae6101fb61d01f34d1bbcb02320225a551.1642921108724","phone":"+917415267759"}

@@ -14,11 +14,19 @@ const userAuthReducer = (currentState = INITIAL_STATE, action) => {
     switch(action.type){
         case userAuthActionTypes.SET_AUTH : 
             const { user } = action.payload;
-            return {
-                ...currentState,
-                userDetails : user,
-                isAuth : true
-            };
+            if(user === null){
+                return {
+                    ...currentState,
+                    userDetails : user,
+                    isAuth : false,
+                }
+            }else{
+                return {
+                    ...currentState,
+                    userDetails : user,
+                    isAuth : true
+                };
+            }
         
         case userAuthActionTypes.SET_OTP :
             return {

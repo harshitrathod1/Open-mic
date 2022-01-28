@@ -1,21 +1,26 @@
-import "./App.css";
+import React from "react";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { useNavigate } from "react-router-dom";
+import { useLoadingWithRefresh } from "hooks/useLoadingWithRefresh";
 
 import Home from "./pages/Home/Home.component";
 import Navigation from "./components/shared/Navigation/Navigation.component";
 import Authenticate from "./pages/Authenticate/Authenticate.component";
 import Activate from "./pages/Activate/Activate.component";
 import Rooms from "./pages/Rooms/Rooms.component";
+import Loader from "components/shared/Loader/Loader.component";
+import Room from "pages/Room/Room.component";
 
-// const isAuth = false;
-// const user = {
-//   activated: false,
-// };
+import "./App.css";
 
 const App = () => {
-  return (
+  //call refresh endpoint
+  const { loading } = useLoadingWithRefresh();
+
+  return loading ? ( 
+    <Loader message="Loading, please wait..."/> 
+    ) : (
     <BrowserRouter>
       <Navigation />
       <Routes>
@@ -52,9 +57,20 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/room/:id"
+          element={
+            <ProtectedRoute>
+              <Room/>
+            </ProtectedRoute>
+          }
+        />
+        
       </Routes>
     </BrowserRouter>
-  );
+  ) 
+  
 };
 
 const GuestRoute = ({ children }) => {

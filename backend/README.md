@@ -61,3 +61,4 @@ public/private key pair using RSA or ECDSA
     - Longer duration tokens used to obtain renewed access token
     - sent as httpOnly cookie which is not accessible by javascript
     - It must have expiration times 
+

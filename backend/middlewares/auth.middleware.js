@@ -15,6 +15,6 @@ module.exports = async function(req,res,next) {
         req.user = userData;
         next();
     }catch(error){
-        res.status(401).json({ message : "Invalid token"})
+        res.status(401).json({ message : "Invalid token from middleware"})
     }
 }   
