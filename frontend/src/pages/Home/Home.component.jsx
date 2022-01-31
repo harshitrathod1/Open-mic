@@ -23,9 +23,9 @@ const Home = () => {
 
   return (
     <div className={styles.cardWrapper}>
-      <Card title="Welcome to Clubhouse" icon="logo">
+      <Card title="Welcome to Open Mic" icon="logo">
         <p className={styles.text}>
-          We're are working hard to get clubhouse ready for everyone! While we
+          We're are working hard to get Open Mic ready for everyone! While we
           wrap up finishing touches, we are adding people gradually so nothing
           breaks up!
         </p>

@@ -80,6 +80,7 @@ class AuthController {
 
     // Token 
     const { accessToken, refreshToken } = tokenService.generateTokens({
+      //SearchMe
       _id: user._id,
       activated: false
     });
@@ -116,7 +117,6 @@ class AuthController {
 
     //check if token in DB
     try{
-      console.log(userData);
       const token = await tokenService.findRefreshToken(userData._id, refreshTokenFromCookie);
       if(!token){
         return res.status(401).json({ message : "Couldn't find token in DB"});

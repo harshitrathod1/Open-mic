@@ -30,7 +30,7 @@ const StepName = ({ onNext }) => {
         <TextInput value={nameInput} onChange={(e) => setNameInput(e.target.value)} />
 
         <p className={styles.paragraph}>
-          People use real names at clubhouse :) !
+          People use real names at Open Mic :) !
         </p>
 
         <div className={styles.actionButtonWrap}>

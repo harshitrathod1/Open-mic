@@ -18,7 +18,7 @@ class OtpService {
         return await twilio.messages.create({
             to : phone,
             from : process.env.SMS_FROM_NUMBER,
-            body : `Your clubhouse test otp is ${otp}`,
+            body : `Your Open Mic test otp is ${otp}`,
         })
     }
 

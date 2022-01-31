@@ -31,7 +31,7 @@ const StepAvatar = ({ onNext }) => {
 
   async function submit(){
     if (!name || !avatar){
-      alert("No images selected");
+      // alert("No images selected");
       return;
     } 
       
