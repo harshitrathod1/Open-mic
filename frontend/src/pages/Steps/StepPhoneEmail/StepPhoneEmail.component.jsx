@@ -34,6 +34,13 @@ const StepPhoneEmail = ({ onNext }) => {
             </button>
           </div>
           <Component onNext={onNext} />
+          <div className={styles.otpWarn}>
+            <p>
+              Otp service takes charges,<br/> 
+              So you can see your OTP in browser dev tools<br/>
+              PRESS CTRL + SHIFT + J
+            </p>
+          </div>
         </div>
       </div>
     </>

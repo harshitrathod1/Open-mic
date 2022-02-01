@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     otp : {
         phone : '',
         hash : '',
+        email: '',
     },
 }
 

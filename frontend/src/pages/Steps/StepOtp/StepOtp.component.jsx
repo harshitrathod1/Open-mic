@@ -20,7 +20,7 @@ const StepOtp = () => {
       }
       try{
         const { data } = await verifyOtp({ otp, phone, hash });
-        console.log(data);
+        console.log("Step OTP :",data);
         dispatch(setAuth(data));
       }catch(error){
         alert("OTP invalid");

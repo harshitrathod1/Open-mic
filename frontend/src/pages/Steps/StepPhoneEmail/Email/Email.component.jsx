@@ -13,12 +13,14 @@ const Email = ({ onNext }) => {
     const [emailAddress, setEmailAddress] = useState('');
     const dispatch = useDispatch();
 
-    
+    function submit(){
+        
+    }
     return (
         <Card title="Enter your email address" icon="email-emoji">
             <TextInput value={emailAddress} onChange={ (e) => setEmailAddress(e.target.value)}/>
             <div className={styles.actionButtonWrap}>
-                <Button text="Next" onClick={onNext}/>
+                <Button text="Next" onClick={submit}/>
             </div>
             <p className={styles.bottomParagraph}>
                 By entering your email, you're agreeing to our Terms of
